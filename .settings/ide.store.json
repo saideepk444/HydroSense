@@ -1,0 +1,7 @@
+{
+  "board": "NUCLEO-L4R5ZI-P",
+  "device": "STM32L4R5ZIT6P",
+  "core": "Cortex-M4",
+  "order": 0,
+  "toolchain": "GCC"
+}
