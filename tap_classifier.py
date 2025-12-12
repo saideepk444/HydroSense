@@ -14,7 +14,9 @@ Requirements:
   pip install pyserial librosa numpy scikit-learn
 """
 
-import argparse
+from scipy.stats import skew, kurtosis
+import librosa
+import argparse 
 import serial
 import struct
 import wave
@@ -50,6 +52,27 @@ CHANNELS = 1
 SAMPLE_WIDTH = 2  # 16-bit
 
 
+# ---------------------------------------------------------------------------
+# LED command bytes (MUST match STM32 firmware #defines)
+# ---------------------------------------------------------------------------
+CMD_LED_EMPTY  = b'\x20'
+CMD_LED_100ML  = b'\x21'
+CMD_LED_300ML  = b'\x22'
+CMD_LED_500ML  = b'\x23'
+CMD_LED_700ML  = b'\x24'
+CMD_LED_900ML  = b'\x25'
+
+# Map *model class names* → LED command bytes.
+# Make sure keys match label_encoder class names (case-insensitive).
+CLASS_TO_CMD = {
+    "empty": CMD_LED_EMPTY,
+    "100ml": CMD_LED_100ML,
+    "300ml": CMD_LED_300ML,
+    "500ml": CMD_LED_500ML,
+    "700ml": CMD_LED_700ML,
+    "900ml": CMD_LED_900ML,
+}
+
 # ============================================================================
 #                           FEATURE EXTRACTION
 # ============================================================================
@@ -81,6 +104,18 @@ def extract_features(audio_path, sr=44100, n_mfcc=13, n_fft=2048, hop_length=512
     features.extend(mfccs_min)
 
     return np.array(features)
+
+
+def _compute_stats(arr):
+    """Compute statistical features from an array."""
+    return [
+        np.mean(arr),
+        np.std(arr),
+        np.max(arr),
+        np.min(arr),
+        skew(arr) if len(arr) > 2 else 0,
+        kurtosis(arr) if len(arr) > 2 else 0
+    ]
 
 
 def predict_from_file(file_path, model, scaler, label_encoder):
@@ -115,7 +150,7 @@ def predict_from_file(file_path, model, scaler, label_encoder):
 def create_wav_filename(output_dir):
     """Generate unique filename with timestamp"""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"quarter_shake_{timestamp}.wav"
+    filename = f"900ml_{timestamp}.wav"
     return os.path.join(output_dir, filename)
 
 
@@ -301,6 +336,19 @@ def run_pipeline(port, baudrate, output_dir, model_dir):
                                                    key=lambda x: x[1], reverse=True):
                         bar = "█" * int(prob * 20)
                         print(f"    {class_name:20s}: {prob:5.1%} {bar}")
+                    # ======== Send LED level command to STM32 ========
+                    pred_key = str(predicted_class).strip().lower()
+                    cmd = CLASS_TO_CMD.get(pred_key, None)
+
+                    if cmd is not None:
+                        try:
+                            ser.write(cmd)
+                            ser.flush()
+                            print(f"\n  Sent LED command for class '{predicted_class}' ({cmd.hex()})")
+                        except Exception as e:
+                            print(f"  Error sending LED command: {e}")
+                    else:
+                        print(f"\n  No LED command mapped for class '{predicted_class}'")
 
                 except Exception as e:
                     print(f"  Error during classification: {e}")
