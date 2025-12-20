@@ -19,7 +19,7 @@
 ## Poster
 
 <p align="center">
-  <img src="assets/HydroSense%poster.pptx.pdf" alt="HydroSense poster" width="720" />
+  <img src="assets/HydroSense%20poster.pptx.pdf" alt="HydroSense poster" width="720" />
 </p>
 
 ---
