@@ -1,3 +1,0 @@
-1) source ultrasonic/bin/activate
-
-2) python3 tap_classifier.py -p /dev/cu.usbserial-A5XK3RJT -m ./models
