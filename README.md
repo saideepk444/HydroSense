@@ -114,7 +114,7 @@ The script waits for a tap-triggered recording, saves a WAV, extracts MFCCs, sca
 ## Team
 
 <p align="center">
-  <img src="assets/grouppicture" alt="HydroSense team" width="400" />
+  <img src="assets/grouppicture.jpeg" alt="HydroSense team" width="400" />
 </p>
 
 - Saideep Kasipathy  
