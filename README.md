@@ -111,3 +111,13 @@ The script waits for a tap-triggered recording, saves a WAV, extracts MFCCs, sca
 - Adjust `SAMPLE_RATE`/`baudrate` in the Python scripts to match firmware settings.
 - Use `uart_pcm_to_wav.py` to debug raw PCM framing without the tap protocol (it just listens for sync headers and length fields).
 
+## Team
+
+<p align="center">
+  <img src="assets/grouppicture" alt="HydroSense team" width="400" />
+</p>
+
+- Saideep Kasipathy  
+- Yunjong (Kevin) Na  
+- Min Park
+
