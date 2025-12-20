@@ -7,19 +7,8 @@
 ---
 
 ## Poster
-
-📄 [View the poster (PDF)](assets/HydroSense%20poster.pptx.pdf)
-
 <p align="center">
-  <img src="assets/poster.png" alt="HydroSense poster preview" width="820" />
-</p>
-
----
-
-## Poster
-
-<p align="center">
-  <img src="assets/HydroSense%20poster.pptx.pdf" alt="HydroSense poster" width="720" />
+  <img src="assets/HydroSense%20poster.jpg" alt="HydroSense poster" width="820" />
 </p>
 
 ---
