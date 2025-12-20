@@ -1,4 +1,4 @@
-# HydroSense — Tap-Triggered Water-Level Classifier (EECS 373 Fall 25)
+# HydroSense — Tap-Triggered Water-Level Classifier
 
 **HydroSense** turns a regular (non-transparent) water bottle into a “smart” bottle by estimating the **water level** using **vibration/audio sensing** + a lightweight **ML classifier**, then displaying the predicted class on a **WS2812B (NeoPixel) LED strip**.
 
