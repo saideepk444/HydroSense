@@ -116,8 +116,8 @@ The script waits for a tap-triggered recording, saves a WAV, extracts MFCCs, sca
 <p align="center">
   <img src="assets/grouppicture.jpeg" alt="HydroSense team" width="400" />
 </p>
+<p align="center">
+  <em>Left to right: Yunjong (Kevin) Na, Saideep Kasipathy, Min Park</em>
+</p>
 
-- Saideep Kasipathy  
-- Yunjong (Kevin) Na  
-- Min Park
 
