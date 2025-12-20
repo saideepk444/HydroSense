@@ -6,10 +6,12 @@
 
 ---
 
-## Setup
+## Poster
+
+📄 [View the poster (PDF)](assets/HydroSense%20poster.pptx.pdf)
 
 <p align="center">
-  <img src="assets/assembled%20device.JPG" alt="HydroSense setup" width="720" />
+  <img src="assets/poster.png" alt="HydroSense poster preview" width="820" />
 </p>
 
 ---
