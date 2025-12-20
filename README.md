@@ -49,10 +49,10 @@ HydroSense uses:
 We classify into **6 classes**:
 ```python
 classes = ['empty', '100ml', '300ml', '500ml', '700ml', '900ml']
-
+``` 
 ---
 
-### Tap-Triggered Shake Classifier
+### More Details for Tap-Triggered Water-Level Classifier
 
 Embedded + Python pipeline for classifying “shake” gestures captured by an STM32L4R5 board. The board listens for IMU tap interrupts, records microphone audio with DFSDM+DMA, and sends PCM over UART; the laptop scripts save WAVs, train a linear SVM, and run live inference.
 
