@@ -1,3 +1,65 @@
+# HydroSense — Tap-Triggered Water-Level Classifier (EECS 373 Fall 25)
+
+**HydroSense** turns a regular (non-transparent) water bottle into a “smart” bottle by estimating the **water level** using **vibration/audio sensing** + a lightweight **ML classifier**, then displaying the predicted class on a **WS2812B (NeoPixel) LED strip**.
+
+> EECS 373: Introduction to Embedded System Design (Winter 2025) — University of Michigan
+
+---
+
+## Setup
+
+<p align="center">
+  <img src="assets/assembled%20device.JPG" alt="HydroSense setup" width="720" />
+</p>
+
+---
+
+## Poster
+
+<p align="center">
+  <img src="assets/HydroSense%poster.pptx.pdf" alt="HydroSense poster" width="720" />
+</p>
+
+---
+
+## Demos (GIFs)
+
+### 300 mL shake
+<p align="center">
+  <img src="assets/300mL.gif" alt="300 mL shake demo" width="720" />
+</p>
+
+### 700 mL shake
+<p align="center">
+  <img src="assets/700mL.gif" alt="700 mL shake demo" width="720" />
+</p>
+
+---
+
+## Motivation
+
+Touching a bottle to check water level is easy when it’s transparent—hard when it isn’t. HydroSense explores a **low-cost, flexible** approach that works on ordinary bottles by using **vibration/audio sensing** and a lightweight **SVM** classifier.
+
+---
+
+## Project Description
+
+HydroSense uses:
+1. **IMU** detects a tap/motion event to trigger recording  
+2. **VPU microphone** captures bottle vibration audio (PDM)  
+3. **STM32 (NUCLEO-L4R5ZI-P)** captures audio using **DFSDM + DMA**  
+4. Audio is streamed over **UART** to a laptop  
+5. Laptop extracts **MFCC features** and runs a **Linear SVM** classifier  
+6. Laptop sends back a **1-byte LED command**  
+7. STM32 updates **WS2812B LED** color/pattern based on predicted class
+   
+### Water-Level Classes
+
+We classify into **6 classes**:
+```python
+classes = ['empty', '100ml', '300ml', '500ml', '700ml', '900ml']
+
+
 # Tap-Triggered Shake Classifier
 
 Embedded + Python pipeline for classifying “shake” gestures captured by an STM32L4R5 board. The board listens for IMU tap interrupts, records microphone audio with DFSDM+DMA, and sends PCM over UART; the laptop scripts save WAVs, train a linear SVM, and run live inference.
